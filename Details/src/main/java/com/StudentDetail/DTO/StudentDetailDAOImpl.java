@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.StudentDetail.Model.Students;
 
@@ -128,27 +130,28 @@ public class StudentDetailDAOImpl implements IStudentDetailDAO {
 
 	}
 
-	public void listStudent(Students objectStudent) {
+	public List<Students> listStudent() {
 		Connection connection;
-
+		List<Students> objectList = new ArrayList<Students>();
 		try {
 			connection = getConnection();
 			PreparedStatement Preparedstatement = connection
-					.prepareStatement("select * from studentsdetail ");
+					.prepareStatement("SELECT * FROM STUDENTSDETAIL ");
 			ResultSet resultSet = Preparedstatement.executeQuery();
 			while (resultSet.next()) {
-				System.out.println();
-				System.out.println("Roll Number : "
-						+ resultSet.getInt("ROLL_NUMBER") + "\nName : "
-						+ resultSet.getString("NAME") + "\nAddress : "
-						+ resultSet.getString("ADDRESS") + "\nCity : "
-						+ resultSet.getString("CITY") + "\nPassword : "
-						+ resultSet.getString("PASSWORD"));
-				System.out.println();
+				Students objectStudents = new Students();
+				objectStudents.setRollNumber(resultSet.getInt(1));
+				objectStudents.setName(resultSet.getString(2));
+				objectStudents.setAddress(resultSet.getString(3));
+				objectStudents.setCity(resultSet.getString(4));
+				objectStudents.setPassword(resultSet.getString(5));
+
+				objectList.add(objectStudents);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return objectList;
 	}
 
 	public boolean sortByRollNumber(Students objectStudent) {

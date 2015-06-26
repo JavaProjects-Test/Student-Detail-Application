@@ -3,6 +3,8 @@ package com.StudentDetail.Client;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Iterator;
+import java.util.List;
 
 import com.StudentDetail.Model.Students;
 import com.StudentDetail.Service.IStudentDetailService;
@@ -15,7 +17,6 @@ public class StudentMain {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		Students objectStudents = new Students();
 		IStudentDetailService objDetailService = new StudentServiceDetailImpl();
-		
 
 		while (true) {
 			try {
@@ -64,14 +65,16 @@ public class StudentMain {
 					System.out.println("Enter new Name");
 					objectStudents.setName(br.readLine());
 
-				/*	System.out.println("Enter new Address");
-					objectStudents.setAddress(br.readLine());
-
-					System.out.println("Enter new City");
-					objectStudents.setCity(br.readLine());
-
-					System.out.println("Enter new Password");
-					objectStudents.setPassword(br.readLine());*/
+					/*
+					 * System.out.println("Enter new Address");
+					 * objectStudents.setAddress(br.readLine());
+					 * 
+					 * System.out.println("Enter new City");
+					 * objectStudents.setCity(br.readLine());
+					 * 
+					 * System.out.println("Enter new Password");
+					 * objectStudents.setPassword(br.readLine());
+					 */
 
 					objDetailService.modifyStudent(objectStudents);
 					break;
@@ -86,7 +89,6 @@ public class StudentMain {
 				}
 				case 5: {
 
-					
 					System.out
 							.println("How do you want to see List: \n1. Sorted\n2. Unsorted");
 					switch (Integer.parseInt(br.readLine())) {
@@ -95,8 +97,7 @@ public class StudentMain {
 								.println("Sort by: \n1. Roll Number\n2. Name\n3. Address\n4. City\n5. Password");
 						switch (Integer.parseInt(br.readLine())) {
 						case 1: {
-							objDetailService
-									.sortByRollNumber(objectStudents);
+							objDetailService.sortByRollNumber(objectStudents);
 							break;
 						}
 						case 2: {
@@ -104,8 +105,7 @@ public class StudentMain {
 							break;
 						}
 						case 3: {
-							objDetailService
-									.sortByAddress(objectStudents);
+							objDetailService.sortByAddress(objectStudents);
 							break;
 						}
 						case 4: {
@@ -113,8 +113,7 @@ public class StudentMain {
 							break;
 						}
 						case 5: {
-							objDetailService
-									.sortByPassword(objectStudents);
+							objDetailService.sortByPassword(objectStudents);
 							break;
 						}
 						default:
@@ -124,7 +123,20 @@ public class StudentMain {
 						break;
 					}
 					case 2: {
-						objDetailService.listStudent(objectStudents);
+						List<Students> list = objDetailService.listStudent();
+						Iterator<Students> iterator = list.iterator();
+						System.out
+						.println("ROLL NUMBER\t\tNAME\t\tADDRESS\t\tCITY\t\tPASSWORD");
+						while (iterator.hasNext()) {
+							Students listOfStudent = iterator.next();
+							System.out.println(listOfStudent.getRollNumber()
+									+ "\t\t\t" + listOfStudent.getName() + "\t\t"
+									+ listOfStudent.getAddress() + "\t\t"
+									+ listOfStudent.getCity() + "\t\t"
+									+ listOfStudent.getPassword());
+							System.out.println();
+						}
+
 						break;
 					}
 					default:

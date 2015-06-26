@@ -1,5 +1,7 @@
 package com.StudentDetail.Service;
 
+import java.util.List;
+
 import com.StudentDetail.DTO.IStudentDetailDAO;
 import com.StudentDetail.DTO.StudentDetailDAOImpl;
 import com.StudentDetail.Model.Students;
@@ -53,9 +55,9 @@ public class StudentServiceDetailImpl implements IStudentDetailService {
 		return status;
 	}
 
-	public boolean listStudent(Students objectStudent) {
-		objectDetailDAO.listStudent(objectStudent);
-		return true;
+	public List<Students> listStudent() {
+
+		return objectDetailDAO.listStudent();
 	}
 
 	public boolean sortByRollNumber(Students objectStudent) {

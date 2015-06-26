@@ -1,6 +1,8 @@
 package com.StudentDetail.DTO;
 
 
+import java.util.List;
+
 import com.StudentDetail.Model.Students;
 
 public interface IStudentDetailDAO {
@@ -12,9 +14,8 @@ public interface IStudentDetailDAO {
 
 	public void searchStudent(Students objectStudent);
 
-	public void listStudent(Students objectStudent);
+	public List<Students> listStudent();
 
-	
 	public boolean sortByRollNumber(Students objectStudent);
 
 	public boolean sortByname(Students objectStudent);

@@ -1,5 +1,7 @@
 package com.StudentDetail.Service;
 
+import java.util.List;
+
 import com.StudentDetail.Model.Students;
 
 public interface IStudentDetailService {
@@ -12,8 +14,8 @@ public interface IStudentDetailService {
 
 	public boolean searchStudent(Students objectStudent);
 
-	public boolean listStudent(Students objectStudent);
-	
+	public List<Students> listStudent();
+
 	public boolean sortByRollNumber(Students objectStudent);
 
 	public boolean sortByname(Students objectStudent);
